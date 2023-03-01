@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./adminScenes/Dashboard";
-import ASidebar from "./adminScenes/Global/ASidebar";
-import { ATopbar } from "./adminScenes/Global/ATopbar";
-import Login from "./components/Login";
-import Signup from "./components/SignUp";
+import Dashboard from "../adminScenes/Dashboard";
+import ASidebar from "../adminScenes/Global/ASidebar";
+import { ATopbar } from "../adminScenes/Global/ATopbar";
+import Login from "../components/Login";
+import Signup from "../components/SignUp";
 
 const Admin = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);

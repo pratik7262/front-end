@@ -10,7 +10,6 @@ import {
   import React, { useContext } from "react";
   import { AccountCircleOutlined, Logout } from "@mui/icons-material";
   import { useToggle } from "../hooks/useToggle";
-  import { useState } from "react";
   import { useEffect } from "react";
   import { colors } from "../theme";
 import userContext from "../contexts/userContext/userContext";
@@ -29,7 +28,8 @@ import userContext from "../contexts/userContext/userContext";
     };
     useEffect(() => {
       getUser();
-    }, [user]);
+      // eslint-disable-next-line
+    }, []);
   
     const logOut = () => {
       localStorage.removeItem("token");
