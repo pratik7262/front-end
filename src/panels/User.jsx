@@ -9,6 +9,9 @@ import Signup from "../components/SignUp";
 import Holdings from "../userScenes/Holdings";
 import AddProperty from "../userScenes/AddProperty";
 import Approval from "../userScenes/Aproval/inedex";
+import ApprovedProperties from "../userScenes/ApprovedProperties";
+import ListedProperties from "../userScenes/ListedProperties";
+import Marketplace from "../userScenes/Marketplace.jsx";
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -33,8 +36,6 @@ const User = () => {
           <Route path="/properties/holdings" element={<Holdings />} />
           <Route path="/properties/sell" element={<AddProperty />} />
           <Route path="/properties/pendingapproval" element={<Approval />} />
-          {/* 
-          
           <Route
             path="/properties/approvedproperties"
             element={<ApprovedProperties />}
@@ -44,6 +45,8 @@ const User = () => {
             element={<ListedProperties />}
           />
           <Route path="/marketplace" element={<Marketplace />} />
+          {/* 
+          
           <Route path="/sample" element={<SampleTextFields />} /> */}
         </Routes>
       </main>
