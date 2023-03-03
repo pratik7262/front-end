@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import CustomSelect from "../../components/CustomSelect";
@@ -13,7 +7,6 @@ import investContext from "../../contexts/investContext/investContext";
 import propertyContext from "../../contexts/propertyContext/propertyContext";
 import { resizeFile } from "../../resizer";
 import { colors } from "../../theme";
-
 
 const AddProperty = () => {
   const { addProperty } = useContext(propertyContext);
@@ -28,6 +21,7 @@ const AddProperty = () => {
     country: "",
     zipCode: "",
     state: "",
+    rentalIncome: "",
     city: "",
     price: "",
     area: "",
@@ -50,6 +44,7 @@ const AddProperty = () => {
   formData.append("city", details.city);
   formData.append("price", details.price);
   formData.append("area", details.area);
+  formData.append("rentalIncome", details.rentalIncome);
   formData.append("country", details.country);
   formData.append("zipCode", details.zipCode);
 
@@ -182,6 +177,12 @@ const AddProperty = () => {
                   onChange={onChange}
                   label="Area"
                   name="area"
+                />
+                <CustomTextField
+                  value={details.rentalIncome}
+                  onChange={onChange}
+                  label="Rental Income"
+                  name="rentalIncome"
                 />
               </Stack>
 

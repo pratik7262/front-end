@@ -64,19 +64,6 @@ const Approval = () => {
       },
     },
     {
-      field: "units",
-      headerName: "Units",
-      flex: 1,
-      renderCell: ({ row: { price } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {price / 100}
-          </Typography>
-        );
-      },
-    },
-
-    {
       field: "date",
       headerName: "Date Of Submission",
       headerAlign: "center",
@@ -88,6 +75,18 @@ const Approval = () => {
         return (
           <Typography variant="h5" color={colors.grey[100]}>
             {formatedDate}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: "units",
+      headerName: "Units",
+      flex: 1,
+      renderCell: ({ row: { price } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {price / 100}
           </Typography>
         );
       },

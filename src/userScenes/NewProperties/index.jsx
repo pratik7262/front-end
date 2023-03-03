@@ -31,12 +31,11 @@ import { colors } from "../../theme";
     return (
       <>
         <Grid
-          p={4}
+          p={2}
           rowSpacing={3}
           direction="row"
           columnSpacing={2}
           container
-          mt={2}
           width="100%"
         >
           {property.map((item) => {
@@ -74,6 +73,14 @@ import { colors } from "../../theme";
                       fontWeight={700}
                     >
                       Price Per Unit: {100}
+                    </Typography>
+                    <Typography
+                      color={colors.grey[100]}
+                      textAlign="center"
+                      variant="h5"
+                      fontWeight={700}
+                    >
+                      Rental Income: {item.rentalIncome}
                     </Typography>
                     <Typography
                       color={colors.grey[100]}

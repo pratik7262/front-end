@@ -70,6 +70,18 @@ const ListedProperties = () => {
       },
     },
     {
+      field: "date",
+      headerName: "Date",
+      flex: 1,
+      renderCell: ({ row: { date } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {date.slice(0, 10)}
+          </Typography>
+        );
+      },
+    },
+    {
       field: "units",
       headerName: "Units",
       headerAlign: "left",

@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import InvestModal from "../../components/InvestModal";
-import modalContext from "../../contexts/modalContext/modalContext"
+import modalContext from "../../contexts/modalContext/modalContext";
 import { colors } from "../../theme";
 
 function Marketplace() {
@@ -49,6 +49,18 @@ function Marketplace() {
         return (
           <Typography variant="h5" color={colors.grey[100]}>
             {name}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: "date",
+      headerName: "Date",
+      flex: 1,
+      renderCell: ({ row: { date } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {date.slice(0, 10)}
           </Typography>
         );
       },
