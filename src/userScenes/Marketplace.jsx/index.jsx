@@ -20,7 +20,6 @@ function Marketplace() {
         },
       }
     );
-    console.log(resp);
     const json = await resp.json();
     setListedProperties(json.listedProperty);
   };

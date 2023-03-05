@@ -46,6 +46,11 @@ export const UTopbar = ({ setDisplayNone, setDisplayBlock }) => {
             text="Marketplace"
             onClick={setDisplayBlock}
           />
+          <Pages
+            to="/assetmanagement"
+            text="Asset Management"
+            onClick={setDisplayBlock}
+          />
           <Pages to="/about" text="About Us" onClick={setDisplayNone} />
           <Pages to="/help" text="Help" onClick={setDisplayNone} />
         </Box>
