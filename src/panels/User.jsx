@@ -13,6 +13,7 @@ import ApprovedProperties from "../userScenes/ApprovedProperties";
 import ListedProperties from "../userScenes/ListedProperties";
 import Marketplace from "../userScenes/Marketplace.jsx";
 import AssetManagement from "../userScenes/AssetManagement";
+import SampleTextFields from "../userScenes/Sample";
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -47,9 +48,9 @@ const User = () => {
           />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/assetmanagement" element={<AssetManagement />} />
-          {/* 
           
-          <Route path="/sample" element={<SampleTextFields />} /> */}
+          
+          <Route path="/sample" element={<SampleTextFields/>} />
         </Routes>
       </main>
     </div>

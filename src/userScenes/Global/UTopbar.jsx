@@ -31,7 +31,7 @@ export const UTopbar = ({ setDisplayNone, setDisplayBlock }) => {
       >
         <Box
           display="flex"
-          width="500px"
+          width="600px"
           alignItems="center"
           justifyContent="space-between"
         >

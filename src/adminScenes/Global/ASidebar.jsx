@@ -92,6 +92,13 @@ import {
                 selected={selected}
                 setSelected={setSelected}
               />
+              <Item
+                title="Asset Management"
+                to="/assetmanagement"
+                icon={<DashboardOutlined />}
+                selected={selected}
+                setSelected={setSelected}
+              />
             </Box>
           </Menu>
         </ProSidebar>

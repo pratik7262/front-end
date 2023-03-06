@@ -93,37 +93,37 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
               icon={<AddBusinessOutlined sx={{ color: colors.grey[100] }} />}
               title="Add Property"
               selected={selected}
-                setSelected={setSelected}
+              setSelected={setSelected}
             />
             <Item
               to="/properties/pendingapproval"
               icon={<PendingOutlined sx={{ color: colors.grey[100] }} />}
               title="Pending Approvals"
               selected={selected}
-                setSelected={setSelected}
+              setSelected={setSelected}
             />
             <Item
               to="/properties/approvedproperties"
               icon={<CheckCircleOutline sx={{ color: colors.grey[100] }} />}
               title="Approved Properties"
               selected={selected}
-                setSelected={setSelected}
+              setSelected={setSelected}
             />
             <Item
-              to="/properties/holdings"
+              to="/sample"
               icon={
                 <VolunteerActivismOutlined sx={{ color: colors.grey[100] }} />
               }
               title="Holdings"
               selected={selected}
-                setSelected={setSelected}
+              setSelected={setSelected}
             />
             <Item
               to="/properties/listedproperties"
               icon={<BallotOutlined sx={{ color: colors.grey[100] }} />}
               title="Listed Properties"
               selected={selected}
-                setSelected={setSelected}
+              setSelected={setSelected}
             />
           </Box>
         </Menu>

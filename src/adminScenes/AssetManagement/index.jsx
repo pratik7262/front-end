@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
@@ -7,16 +7,13 @@ import { colors } from "../../theme";
 const AssetManagement = () => {
   const [approvedProperties, setApprovedProperties] = useState([]);
   const fetchData = async () => {
-    const responce = await fetch(
-      "http://localhost:5000/api/rental/specificrentalincome",
-      {
-        method: "GET",
-        headers: {
-          "auth-token": localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const responce = await fetch("http://localhost:5000/api/rental/allrental", {
+      method: "GET",
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    });
     const json = await responce.json();
     setApprovedProperties(json.rental);
   };
@@ -38,18 +35,18 @@ const AssetManagement = () => {
         );
       },
     },
-    // {
-    //   field: "title",
-    //   headerName: "Property",
-    //   flex: 1,
-    //   renderCell: ({ row: { title } }) => {
-    //     return (
-    //       <Typography variant="h5" color={colors.grey[100]}>
-    //         {title}
-    //       </Typography>
-    //     );
-    //   },
-    // },
+    {
+      field: "userName",
+      headerName: "Owner",
+      flex: 1,
+      renderCell: ({ row: { userName } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {userName}
+          </Typography>
+        );
+      },
+    },
     {
       field: "InvestedDate",
       headerName: "Date",
@@ -88,13 +85,43 @@ const AssetManagement = () => {
         let date = new Date();
         let oldDate = new Date(investedDate);
         let dif = (date.getTime() - oldDate.getTime()) / 1000;
-        
+     
         let currentRentalIncome =
           rentalIncome + (dif * units * rentalIncomePerSecPerUnit);
         return (
           <Typography variant="h5" color={colors.grey[100]}>
-            {currentRentalIncome.toString().slice(0,7)}
+            {currentRentalIncome.toString().slice(0, 7)}
           </Typography>
+        );
+      },
+    },
+    {
+      field: "_id",
+      headerName: "Pay Rent",
+      flex: 1,
+      renderCell: ({ row: { _id } }) => {
+        let color = "green";
+        let text = "Pay";
+        const onClick = async (_id) => {
+          const res = await fetch(
+            `http://localhost:5000/api/rental/pay/${_id}`
+          );
+          const json = await res.json();
+          if (json.resMsg) {
+            alert(json.resMsg);
+          }
+        };
+        return (
+          <Button
+            onClick={() => {
+              onClick(_id);
+              fetchData();
+            }}
+            color={color}
+            variant="contained"
+          >
+            {text}
+          </Button>
         );
       },
     },
