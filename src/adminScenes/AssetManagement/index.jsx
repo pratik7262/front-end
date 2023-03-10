@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { colors } from "../../theme";
@@ -85,9 +86,9 @@ const AssetManagement = () => {
         let date = new Date();
         let oldDate = new Date(investedDate);
         let dif = (date.getTime() - oldDate.getTime()) / 1000;
-     
+
         let currentRentalIncome =
-          rentalIncome + (dif * units * rentalIncomePerSecPerUnit);
+          rentalIncome + dif * units * rentalIncomePerSecPerUnit;
         return (
           <Typography variant="h5" color={colors.grey[100]}>
             {currentRentalIncome.toString().slice(0, 7)}
@@ -96,19 +97,48 @@ const AssetManagement = () => {
       },
     },
     {
+      field: "paidRentalIncome",
+      headerName: "Paid Rental Income",
+      flex: 1,
+      renderCell: ({ row: { paidRentalIncome } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {paidRentalIncome}
+          </Typography>
+        );
+      },
+    },
+    {
       field: "_id",
       headerName: "Pay Rent",
       flex: 1,
-      renderCell: ({ row: { _id } }) => {
+      renderCell: ({
+        row: {
+          _id,
+          rentalIncome,
+          units,
+          rentalIncomePerSecPerUnit,
+          investedDate,
+        },
+      }) => {
         let color = "green";
         let text = "Pay";
         const onClick = async (_id) => {
-          const res = await fetch(
-            `http://localhost:5000/api/rental/pay/${_id}`
-          );
-          const json = await res.json();
-          if (json.resMsg) {
-            alert(json.resMsg);
+          let date = new Date();
+          let oldDate = new Date(investedDate);
+          let dif = (date.getTime() - oldDate.getTime()) / 1000;
+
+          let currentRentalIncome =
+            rentalIncome + dif * units * rentalIncomePerSecPerUnit;
+          console.log(currentRentalIncome);
+        
+          const res = await axios.post("http://localhost:5000/api/rental/pay", {
+              id: _id,
+              currentRentalIncome: currentRentalIncome,
+          });
+          
+          if (res.data.resMsg) {
+            alert(res.data.resMsg);
           }
         };
         return (

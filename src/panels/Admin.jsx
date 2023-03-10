@@ -6,6 +6,7 @@ import ASidebar from "../adminScenes/Global/ASidebar";
 import { ATopbar } from "../adminScenes/Global/ATopbar";
 import Login from "../components/Login";
 import Signup from "../components/SignUp";
+import { History } from "../History";
 
 const Admin = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -28,6 +29,7 @@ const Admin = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/assetmanagement" element={<AssetManagement/>}/>
+          <Route path="/history" element={<History/>}/>
         </Routes>
       </main>
     </div>

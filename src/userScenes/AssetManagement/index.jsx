@@ -80,7 +80,7 @@ const AssetManagement = () => {
     },
     {
       field: "rentalIncome",
-      headerName: "rentalIncome",
+      headerName: "Pending Rental Income",
       flex: 1,
       renderCell: ({
         row: { rentalIncome, units, rentalIncomePerSecPerUnit, investedDate },
@@ -88,12 +88,24 @@ const AssetManagement = () => {
         let date = new Date();
         let oldDate = new Date(investedDate);
         let dif = (date.getTime() - oldDate.getTime()) / 1000;
-        
+
         let currentRentalIncome =
-          rentalIncome + (dif * units * rentalIncomePerSecPerUnit);
+          rentalIncome + dif * units * rentalIncomePerSecPerUnit;
         return (
           <Typography variant="h5" color={colors.grey[100]}>
-            {currentRentalIncome.toString().slice(0,7)}
+            {currentRentalIncome.toString().slice(0, 7)}
+          </Typography>
+        );
+      },
+    },
+    {
+      field: "paidRentalIncome",
+      headerName: "Paid Rental Income",
+      flex: 1,
+      renderCell: ({ row: { paidRentalIncome } }) => {
+        return (
+          <Typography variant="h5" color={colors.grey[100]}>
+            {paidRentalIncome}
           </Typography>
         );
       },

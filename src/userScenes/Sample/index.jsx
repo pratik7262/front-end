@@ -20,26 +20,12 @@ import { colors } from "../../theme";
 import modalContext from "../../contexts/modalContext/modalContext";
 import SellModal from "../../components/SellModal";
 
-function Row(props) {
+const Row = (props) => {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const { handlesOpen } = useContext(modalContext);
-  const [propertyInfo, setPropertyInfo] = useState({});
-  const isSold = async (propertyId, name, id) => {
-    const res = await fetch(
-      `http://localhost:5000/api/property/issold/${propertyId}`
-    );
-    const json = await res.json();
-    if (!json.sold) {
-      alert("Property Is Not Sold Yet.");
-    } else {
-      setPropertyInfo({ propertyId: propertyId, name: name, id: id });
-      handlesOpen();
-    }
-  };
+
   return (
     <React.Fragment>
-      
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell sx={{ color: "white" }}>
           <IconButton
@@ -90,47 +76,56 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.investments.map((investment) => (
-                    <TableRow key={investment._id}>
-                      <TableCell
-                        sx={{ color: "white" }}
-                        component="th"
-                        scope="row"
-                      >
-                        {investment.date.slice(0,10)}
-                      </TableCell>
-                      <TableCell sx={{ color: "white" }}>
-                        {investment.units}
-                      </TableCell>
-                      <TableCell sx={{ color: "white" }} align="center">
-                        {investment.price}
-                      </TableCell>
-                      <TableCell sx={{ color: "white" }} align="center">
-                        <Button
-                          onClick={() => {
-                            isSold(row.propertyId, row.name, investment.id);
-                          }}
-                          color="blue"
-                          variant="contained"
+                  {row.investments.map((investment) => {
+                    return (
+                      <TableRow key={investment._id}>
+                        <TableCell
+                          sx={{ color: "white" }}
+                          component="th"
+                          scope="row"
                         >
-                          sell
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                          {investment.date.slice(0, 10)}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }}>
+                          {investment.units}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }} align="center">
+                          {investment.price}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }} align="center">
+                          <Button
+                            disabled={!row.isSold}
+                            color="blue"
+                            variant="contained"
+                            onClick={() => {
+                              props.setPropertyInfo({
+                                propertyId: row.propertyId,
+                                name: row.name,
+                                id: investment.id,
+                              });
+                              props.handlesOpen();
+                            }}
+                          >
+                            sell
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-      <SellModal propertyInfo={propertyInfo} />
     </React.Fragment>
   );
-}
+};
 
 const SampleTextFields = () => {
   const [investedProperties, setInvestedProperties] = useState([]);
+  const { handlesOpen } = useContext(modalContext);
+  const [propertyInfo, setPropertyInfo] = useState({});
 
   const getProperties = async () => {
     const resp = await fetch("http://localhost:5000/api/holding/getholdings", {
@@ -150,7 +145,7 @@ const SampleTextFields = () => {
   return (
     <Box
       sx={{
-        m:2,
+        m: 2,
         Width: "100%",
         display: "flex",
         alignItems: "center",
@@ -211,11 +206,19 @@ const SampleTextFields = () => {
           </TableHead>
           <TableBody>
             {investedProperties.map((row) => {
-              return <Row key={row.name} row={row} />;
+              return (
+                <Row
+                  setPropertyInfo={setPropertyInfo}
+                  handlesOpen={handlesOpen}
+                  key={row.name}
+                  row={row}
+                />
+              );
             })}
           </TableBody>
         </Table>
       </TableContainer>
+      <SellModal propertyInfo={propertyInfo} />
     </Box>
   );
 };

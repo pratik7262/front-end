@@ -47,7 +47,7 @@ export const login = async (email, password, navigate) => {
       localStorage.setItem("token", json.authToken);
       localStorage.setItem("userId", json.userId);
 
-      navigate("/properties/sell");
+      navigate("/");
       alert("Logged In Successfully");
       window.location.reload();
     } else {
