@@ -11,13 +11,13 @@ export const addProperty = async (formData,setDisabled) => {
         },
       }
     );
-    if (res.data.success) {
-      alert(res.data.responseMsg);
+    if (res.data.resMSG) {
+      alert(res.data.resMSG);
       window.location.reload();
       setDisabled(false);
     }
   } catch (error) {
-    alert("Plaese Fill All The Fields Properly");
+    alert("Some Error Occured");
     setDisabled(false);
   }
 };
