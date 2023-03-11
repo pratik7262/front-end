@@ -4,9 +4,9 @@ import AssetManagement from "../adminScenes/AssetManagement";
 import Dashboard from "../adminScenes/Dashboard";
 import ASidebar from "../adminScenes/Global/ASidebar";
 import { ATopbar } from "../adminScenes/Global/ATopbar";
+import { History } from "../adminScenes/History";
 import Login from "../components/Login";
 import Signup from "../components/SignUp";
-import { History } from "../History";
 
 const Admin = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);

@@ -6,8 +6,8 @@ import {
 } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Header } from "../components/Header";
-import { colors } from "../theme";
+import { Header } from "../../components/Header";
+import { colors } from "../../theme";
 
 function CustomToolbar() {
   return (
