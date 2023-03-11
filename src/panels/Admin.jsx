@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import AssetManagement from "../adminScenes/AssetManagement";
-import Dashboard from "../adminScenes/Dashboard";
-import ASidebar from "../adminScenes/Global/ASidebar";
-import { ATopbar } from "../adminScenes/Global/ATopbar";
-import { History } from "../adminScenes/History";
-import Login from "../components/Login";
-import Signup from "../components/SignUp";
+import Dashboard from "../scenes/adminScenes/Dashboard";
+import AssetManagement from "../scenes/adminScenes/AssetManagement";
+import { History } from "../scenes/adminScenes/History";
 
 const Admin = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -25,11 +21,9 @@ const Admin = () => {
       >
         <ATopbar />
         <Routes>
-          <Route path="/" element={<Dashboard/>}/>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/assetmanagement" element={<AssetManagement/>}/>
-          <Route path="/history" element={<History/>}/>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/assetmanagement" element={<AssetManagement />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </main>
     </div>

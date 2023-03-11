@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import USidebar from "../userScenes/Global/USidebar";
 import { Route, Routes } from "react-router-dom";
-import { UTopbar } from "../userScenes/Global/UTopbar";
-import Home from "../userScenes/Home";
-import NewProperties from "../userScenes/NewProperties";
-import Login from "../components/Login";
-import Signup from "../components/SignUp";
-import Holdings from "../userScenes/Holdings";
-import AddProperty from "../userScenes/AddProperty";
-import Approval from "../userScenes/Aproval/inedex";
-import ApprovedProperties from "../userScenes/ApprovedProperties";
-import ListedProperties from "../userScenes/ListedProperties";
-import Marketplace from "../userScenes/Marketplace.jsx";
-import AssetManagement from "../userScenes/AssetManagement";
-import SampleTextFields from "../userScenes/Sample";
+import Home from "../scenes/userScenes/Home";
+import  NewProperties  from "../scenes/userScenes/NewProperties";
+import SampleTextFields from "../scenes/userScenes/Sample";
+import AddProperty from "../scenes/userScenes/AddProperty";
+import  ApprovedProperties from "../scenes/userScenes/ApprovedProperties";
+import  ListedProperties  from "../scenes/userScenes/ListedProperties";
+import  Marketplace from "../scenes/userScenes/Marketplace";
+import  AssetManagement from "../scenes/userScenes/AssetManagement";
+import  Login  from "../components/Login";
+import  Signup  from "../components/SignUp";
+import { UTopbar} from "../scenes/userScenes/Global/UTopbar";
+import USidebar from "../scenes/userScenes/Global/USidebar";
+import Approval from "../scenes/userScenes/Approval/inedex";
+
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -35,7 +35,6 @@ const User = () => {
           <Route path="/properties" element={<NewProperties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/properties/holdings" element={<Holdings />} />
           <Route path="/properties/sell" element={<AddProperty />} />
           <Route path="/properties/pendingapproval" element={<Approval />} />
           <Route
@@ -48,9 +47,8 @@ const User = () => {
           />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/assetmanagement" element={<AssetManagement />} />
-          
-          
-          <Route path="/sample" element={<SampleTextFields/>} />
+
+          <Route path="/sample" element={<SampleTextFields />} />
         </Routes>
       </main>
     </div>
