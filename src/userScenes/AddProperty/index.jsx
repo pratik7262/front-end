@@ -12,7 +12,7 @@ const AddProperty = () => {
   const { addProperty } = useContext(propertyContext);
   const { disabled, setDisabled } = useContext(investContext);
   const [img, setImg] = useState("");
-  const [subtypeArr, setSubtyArr] = useState(["Select Type First"]);
+  const [subtypeArr, setSubtyArr] = useState([{name:"Select Type First",objectId:'dkjsfinw',disabled:true}]);
   const [countries, setCountries] = useState([]);
   const [details, setDetails] = useState({
     title: "",
@@ -30,9 +30,9 @@ const AddProperty = () => {
   });
 
   const type = [
-    { name: "Residential" },
-    { name: "Commercial" },
-    { name: "Land" },
+    { name: "Residential", objectId:"type1" },
+    { name: "Commercial" , objectId:"type2"},
+    { name: "Land" , objectId:"type3"},
   ];
 
   const formData = new FormData();
@@ -74,24 +74,24 @@ const AddProperty = () => {
     if (e.target.name === "type") {
       if (e.target.value === "Residential") {
         setSubtyArr([
-          { name: "Individual Home" },
-          { name: "Apartment" },
-          { name: "Townhouse" },
-          { name: "Villa" },
+          { name: "Individual Home", objectId:'sadfwrfcvs'},
+          { name: "Apartment" , objectId:'wefwfds'},
+          { name: "Townhouse", objectId:'dfsfew' },
+          { name: "Villa" , objectId:'d;kwe'},
         ]);
       } else if (e.target.value === "Commercial") {
         setSubtyArr([
-          { name: "Single Shop" },
-          { name: "Complex" },
-          { name: "Warehouse" },
-          { name: "Storage House" },
+          { name: "Single Shop", objectId:'weqdsdq1' },
+          { name: "Complex" , objectId:'weqdsdq2'},
+          { name: "Warehouse", objectId:'weqdsdq3' },
+          { name: "Storage House", objectId:'weqdsdq4' },
         ]);
       } else if (e.target.value === "Land") {
         setSubtyArr([
-          { name: "Agricultural" },
-          { name: "Commericial" },
-          { name: "Residential" },
-          { name: "Industrial" },
+          { name: "Agricultural" ,objectId:'formawoefk1' },
+          { name: "Commericial"  ,objectId:'formawoefk2'},
+          { name: "Residential"  ,objectId:'formawoefk3'},
+          { name: "Industrial",objectId:'formawoefk4' },
         ]);
       }
       setDetails({ ...details, [e.target.name]: e.target.value });

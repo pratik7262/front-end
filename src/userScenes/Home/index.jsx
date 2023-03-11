@@ -4,7 +4,7 @@ import { colors } from "../../theme";
 
 const Typo = ({ text }) => {
   return (
-    <Typography sx={{ my: "15px", color: colors.grey[100] }} variant="h1">
+    <Typography sx={{ my: "15px", color: colors.grey[100] ,fontFamily: "'Style Script', cursive",letterSpacing:'3px' }} variant="h1">
       {text}
     </Typography>
   );

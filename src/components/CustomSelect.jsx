@@ -1,7 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import React from "react";
 
-const CustomSelect = ({ value, onChange, label, name, arr }) => {
+const CustomSelect = ({ value, onChange, label, name, arr, }) => {
   return (
     <TextField
       value={value}
@@ -28,11 +28,7 @@ const CustomSelect = ({ value, onChange, label, name, arr }) => {
       select
     >
       {arr.map((item) => {
-        return (
-          <MenuItem key={item.objectId} value={item.name}>
-            {item.name}
-          </MenuItem>
-        );
+        return <MenuItem disabled={item.disabled} key={item.objectId} value={item.name}>{item.name}</MenuItem>;
       })}
     </TextField>
   );
