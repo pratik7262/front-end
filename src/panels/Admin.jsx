@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "../scenes/adminScenes/Dashboard";
 import AssetManagement from "../scenes/adminScenes/AssetManagement";
 import { History } from "../scenes/adminScenes/History";
+import  ASidebar from "../scenes/adminScenes/Global/ASidebar";
+import { ATopbar } from "../scenes/adminScenes/Global/ATopbar";
+
 
 const Admin = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);

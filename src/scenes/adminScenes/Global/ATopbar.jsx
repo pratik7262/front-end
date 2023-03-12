@@ -1,7 +1,7 @@
 import { Search } from "@mui/icons-material";
 import { Box,  IconButton, InputBase } from "@mui/material";
 import React from "react";
-import { UserProfile } from "../../components/UserPropfile";
+import { UserProfile } from "../../../components/UserPropfile";
 import { colors } from "../../../theme";
 
 export const ATopbar = () => {
