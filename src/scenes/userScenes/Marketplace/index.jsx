@@ -151,7 +151,7 @@ function Marketplace() {
   ];
   return (
     <>
-      <Box m="10px 10px 0">
+      <Box m={2}>
         <Header title="Marketplace" />
         <Box
           m="40px 0 0 0"

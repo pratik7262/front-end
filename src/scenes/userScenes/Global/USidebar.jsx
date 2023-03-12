@@ -2,7 +2,9 @@ import {
   AddBusinessOutlined,
   BallotOutlined,
   CheckCircleOutline,
+  LocalGroceryStoreOutlined,
   MenuOutlined,
+  MonetizationOnOutlined,
   PendingOutlined,
   VolunteerActivismOutlined,
 } from "@mui/icons-material";
@@ -88,29 +90,49 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
             }}
             paddingLeft={isCollapsed ? undefined : "10%"}
           >
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{
+                margin: "15px 0 5px 20px",
+                display: isCollapsed ? "none" : "block",
+              }}
+            >
+              New Property
+            </Typography>
             <Item
-              to="/properties/sell"
+              to="/newproperty/addproperty"
               icon={<AddBusinessOutlined sx={{ color: colors.grey[100] }} />}
               title="Add Property"
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              to="/properties/pendingapproval"
+              to="/newproperty/pendingapproval"
               icon={<PendingOutlined sx={{ color: colors.grey[100] }} />}
               title="Pending Approvals"
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              to="/properties/approvedproperties"
+              to="/newproperty/approvedproperties"
               icon={<CheckCircleOutline sx={{ color: colors.grey[100] }} />}
               title="Approved Properties"
               selected={selected}
               setSelected={setSelected}
             />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{
+                margin: "15px 0 5px 20px",
+                display: isCollapsed ? "none" : "block",
+              }}
+            >
+              Portfolio
+            </Typography>
             <Item
-              to="/sample"
+              to="portfolio/holdings"
               icon={
                 <VolunteerActivismOutlined sx={{ color: colors.grey[100] }} />
               }
@@ -119,9 +141,35 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
               setSelected={setSelected}
             />
             <Item
-              to="/properties/listedproperties"
+              to="/portfolio/listedproperties"
               icon={<BallotOutlined sx={{ color: colors.grey[100] }} />}
               title="Listed Properties"
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{
+                margin: "15px 0 5px 20px",
+                display: isCollapsed ? "none" : "block",
+              }}
+            >
+              Asset Management
+            </Typography>
+            <Item
+              to="assetmanagement/rentalincome"
+              icon={<MonetizationOnOutlined sx={{ color: colors.grey[100] }} />}
+              title="Rental income"
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              to="assetmanagement/marketplace"
+              icon={
+                <LocalGroceryStoreOutlined sx={{ color: colors.grey[100] }} />
+              }
+              title="Marketplace"
               selected={selected}
               setSelected={setSelected}
             />

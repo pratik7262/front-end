@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../scenes/userScenes/Home";
-import  NewProperties  from "../scenes/userScenes/NewProperties";
-import SampleTextFields from "../scenes/userScenes/Sample";
+import NewProperties from "../scenes/userScenes/NewProperties";
 import AddProperty from "../scenes/userScenes/AddProperty";
-import  ApprovedProperties from "../scenes/userScenes/ApprovedProperties";
-import  ListedProperties  from "../scenes/userScenes/ListedProperties";
-import  Marketplace from "../scenes/userScenes/Marketplace";
-import  AssetManagement from "../scenes/userScenes/AssetManagement";
-import  Login  from "../components/Login";
-import  Signup  from "../components/SignUp";
-import { UTopbar} from "../scenes/userScenes/Global/UTopbar";
+import ApprovedProperties from "../scenes/userScenes/ApprovedProperties";
+import ListedProperties from "../scenes/userScenes/ListedProperties";
+import Marketplace from "../scenes/userScenes/Marketplace";
+import AssetManagement from "../scenes/userScenes/AssetManagement";
+import Login from "../components/Login";
+import Signup from "../components/SignUp";
+import { UTopbar } from "../scenes/userScenes/Global/UTopbar";
 import USidebar from "../scenes/userScenes/Global/USidebar";
 import Approval from "../scenes/userScenes/Approval/inedex";
-
+import Holdings from "../scenes/userScenes/Holdings";
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -32,23 +31,28 @@ const User = () => {
         <UTopbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/properties" element={<NewProperties />} />
+          <Route path="/newproperties" element={<NewProperties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/properties/sell" element={<AddProperty />} />
-          <Route path="/properties/pendingapproval" element={<Approval />} />
+          <Route path="/newproperty/addproperty" element={<AddProperty />} />
+          <Route path="/newproperty/pendingapproval" element={<Approval />} />
           <Route
-            path="/properties/approvedproperties"
+            path="/newproperty/approvedproperties"
             element={<ApprovedProperties />}
           />
+          <Route path="/portfolio/holdings" element={<Holdings />} />
           <Route
-            path="/properties/listedproperties"
+            path="/portfolio/listedproperties"
             element={<ListedProperties />}
           />
-          <Route path="/marketplace" element={<Marketplace />} />
-          <Route path="/assetmanagement" element={<AssetManagement />} />
-
-          <Route path="/sample" element={<SampleTextFields />} />
+          <Route
+            path="assetmanagement/rentalincome"
+            element={<AssetManagement />}
+          />
+          <Route
+            path="/assetmanagement/marketplace"
+            element={<Marketplace />}
+          />
         </Routes>
       </main>
     </div>

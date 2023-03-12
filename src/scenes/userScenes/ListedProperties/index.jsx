@@ -134,7 +134,7 @@ const ListedProperties = () => {
 
   return (
     <>
-      <Box m="10px 10px 0">
+      <Box m={2}>
         <Header title="Listed Properties" />
         <Box
           m="40px 0 0 0"

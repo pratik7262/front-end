@@ -1,199 +1,220 @@
-import { Box, Button, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-import React, { useContext, useEffect, useState } from "react";
-// import DetailsModal from "./DetailsModal";
-// import SellModal from "./SellModal";
-import modalContext from "../../contexts/modalContext/modalContext";
-import { Header } from "../../components/Header";
-import { colors } from "../../theme";
-import DetailsModal from "../../components/DetailsModal";
-import SellModal from "../../components/SellModal";
+import {
+  Box,
+  Button,
+  Collapse,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import React, { useContext } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useState } from "react";
+import { useEffect } from "react";
+import SellModal from "../../../components/SellModal";
+import { colors } from "../../../theme";
+import modalContext from "../../../contexts/modalContext/modalContext";
+import { Header } from "../../../components/Header";
 
-function Holdings() {
-  const { handleOpen, handlesOpen } = useContext(modalContext);
-  const [propertyInfo, setPropertyInfo] = useState({}); //sets property info of details and invest modal
-  const [investedProperties, setInvestedProperties] = useState([]); //states all invested properties
+const Row = (props) => {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
 
-  const isSold = async (propertyId, name, id) => {
-    const res = await fetch(
-      `http://localhost:5000/api/property/issold/${propertyId}`
-    );
-    const json = await res.json();
-    if (!json.sold) {
-      alert("Property Is Not Sold Yet.");
-    } else {
-      setPropertyInfo({ propertyId: propertyId, name: name, id: id });
-      handlesOpen();
-    }
-  };
+  return (
+    <React.Fragment>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+        <TableCell sx={{ color: "white" }}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? (
+              <KeyboardArrowUpIcon sx={{ color: "white" }} />
+            ) : (
+              <KeyboardArrowDownIcon sx={{ color: "white" }} />
+            )}
+          </IconButton>
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.genaratedPropertyId}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.name}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.type}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.subtype}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.area}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.city}
+        </TableCell>
+        <TableCell sx={{ color: "white" }} align="center">
+          {row.country}
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Table size="small" aria-label="purchases">
+                <TableHead sx={{ bgcolor: "green.main" }}>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Units</TableCell>
+                    <TableCell align="center">Price Per Unit</TableCell>
+                    <TableCell align="center">Sell</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.investments.map((investment) => {
+                    return (
+                      <TableRow key={investment._id}>
+                        <TableCell
+                          sx={{ color: "white" }}
+                          component="th"
+                          scope="row"
+                        >
+                          {investment.date.slice(0, 10)}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }}>
+                          {investment.units}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }} align="center">
+                          {investment.price}
+                        </TableCell>
+                        <TableCell sx={{ color: "white" }} align="center">
+                          <Button
+                            disabled={!row.isSold}
+                            color="blue"
+                            variant="contained"
+                            onClick={() => {
+                              props.setPropertyInfo({
+                                propertyId: row.propertyId,
+                                name: row.name,
+                                id: investment.id,
+                              });
+                              props.handlesOpen();
+                            }}
+                          >
+                            sell
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+};
+
+const Holdings = () => {
+  const [investedProperties, setInvestedProperties] = useState([]);
+  const { handlesOpen } = useContext(modalContext);
+  const [propertyInfo, setPropertyInfo] = useState({});
 
   const getProperties = async () => {
-    const resp = await fetch(
-      "http://localhost:5000/api/invested/specificinvestedproperty",
-      {
-        method: "GET",
-        headers: {
-          "auth-token": localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const resp = await fetch("http://localhost:5000/api/holding/getholdings", {
+      method: "GET",
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    });
     const json = await resp.json();
-    setInvestedProperties(json.investedProperty);
-  };
-
-  //function for getting details
-  const getDetails = async (propertyId) => {
-    const responce = await fetch(
-      `http://localhost:5000/api/property/propertyinfo/${propertyId}`
-    );
-
-    const json = await responce.json();
-    setPropertyInfo(json);
+    setInvestedProperties(json.holdings);
   };
 
   useEffect(() => {
     getProperties();
   }, [investedProperties]);
-
-  const columns = [
-    {
-      field: "genaratedPropertyId",
-      headerName: "id",
-      flex: 1,
-      renderCell: ({ row: { genaratedPropertyId } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {genaratedPropertyId}
-          </Typography>
-        );
-      },
-    },
-    {
-      field: "name",
-      headerName: "Property",
-      flex: 1,
-      renderCell: ({ row: { name } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {name}
-          </Typography>
-        );
-      },
-    },
-    {
-      field: "units",
-      headerName: "Units",
-      headerAlign: "left",
-      type: Date,
-      align: "left",
-      renderCell: ({ row: { units } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {units}
-          </Typography>
-        );
-      },
-    },
-    {
-      field: "price",
-      headerName: "Price Per Unit",
-      headerAlign: "left",
-      type: Date,
-      align: "left",
-      renderCell: ({ row: { price } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {price}
-          </Typography>
-        );
-      },
-    },
-    {
-      field: "details",
-      headerName: "Details",
-      headerAlign: "center",
-      align: "center",
-      flex: 1,
-      renderCell: ({ row: { propertyId } }) => {
-        return (
-          <Button
-            color="blue"
-            onClick={() => {
-              handleOpen();
-              getDetails(propertyId);
-            }}
-            variant="contained"
-          >
-            details
-          </Button>
-        );
-      },
-    },
-    {
-      field: "sell",
-      headerName: "Sell Property",
-      headerAlign: "center",
-      align: "center",
-      flex: 1,
-      renderCell: ({ row: { propertyId, name, id } }) => {
-        return (
-          <Button
-            onClick={() => {
-              isSold(propertyId, name, id);
-            }}
-            color="blue"
-            variant="contained"
-          >
-            sell
-          </Button>
-        );
-      },
-    },
-  ];
-
   return (
-    <>
-      <Box m="10px 10px 0">
-        <Header title="Holdings" />
-        <Box
-          m="40px 0 0 0"
-          height="75vh"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .name-column--cell": {
-              color: colors.greenAccent[300],
-            },
-            "& .MuiDataGrid-columnHeader": {
-              backgroundColor: colors.blueAccent[700],
-              border: "none",
-              color: colors.grey[100],
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: colors.primary[400],
-            },
-            "& .MuiDataGrid-footerContainer": {
-              backgroundColor: colors.blueAccent[700],
-              borderTop: "none",
-              color: colors.blueAccent[700],
-            },
-            "& .MuiToolbar-gutters": {
-              display: "none",
-            },
-          }}
-        >
-          <DataGrid rows={investedProperties} columns={columns} />
-          <SellModal propertyInfo={propertyInfo} />
-          <DetailsModal property={propertyInfo} />
-        </Box>
-      </Box>
-    </>
+    <Box m={2}>
+      <Header title="Holdings" />
+      <TableContainer
+        sx={{ bgcolor: colors.primary[400], m: "40px 0 0 0", height: "75vh" }}
+        component={Paper}
+      >
+        <Table aria-label="collapsible table">
+          <TableHead sx={{ bgcolor: "#3e4396" }}>
+            <TableRow>
+              <TableCell />
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                ID
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                Name
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                Type
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                Subtype
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                Area
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                City
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: "1rem", fontWeight: 600, color: "white" }}
+                align="center"
+              >
+                Country
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {investedProperties.map((row) => {
+              return (
+                <Row
+                  setPropertyInfo={setPropertyInfo}
+                  handlesOpen={handlesOpen}
+                  key={row.name}
+                  row={row}
+                />
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <SellModal propertyInfo={propertyInfo} />
+    </Box>
   );
-}
+};
 
 export default Holdings;

@@ -1,4 +1,4 @@
-import { Box, Button,  Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { UserProfile } from "../../../components/UserPropfile";
 import { colors } from "../../../theme";
@@ -31,26 +31,17 @@ export const UTopbar = ({ setDisplayNone, setDisplayBlock }) => {
       >
         <Box
           display="flex"
-          width="600px"
+          width="300px"
           alignItems="center"
           justifyContent="space-between"
         >
           <Pages to="/" text="Home" onClick={setDisplayBlock} />
           <Pages
-            to="/properties"
+            to="/newproperties"
             text="New Properties"
             onClick={setDisplayBlock}
           />
-          <Pages
-            to="/marketplace"
-            text="Marketplace"
-            onClick={setDisplayBlock}
-          />
-          <Pages
-            to="/assetmanagement"
-            text="Asset Management"
-            onClick={setDisplayBlock}
-          />
+
           <Pages to="/about" text="About Us" onClick={setDisplayNone} />
           <Pages to="/help" text="Help" onClick={setDisplayNone} />
         </Box>
