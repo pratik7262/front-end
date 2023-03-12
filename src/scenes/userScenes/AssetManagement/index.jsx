@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
 
@@ -32,7 +33,7 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { genaratedId } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {genaratedId}
           </Typography>
         );
@@ -44,7 +45,7 @@ const AssetManagement = () => {
     //   flex: 1,
     //   renderCell: ({ row: { title } }) => {
     //     return (
-    //       <Typography variant="h5" color={colors.grey[100]}>
+    //       <Typography variant="h6" color={colors.grey[100]}>
     //         {title}
     //       </Typography>
     //     );
@@ -56,11 +57,11 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { investedDate } }) => {
         return investedDate ? (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {investedDate.slice(0, 10)}
           </Typography>
         ) : (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             Not Sold
           </Typography>
         );
@@ -72,7 +73,7 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { units } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {units}
           </Typography>
         );
@@ -92,7 +93,7 @@ const AssetManagement = () => {
         let currentRentalIncome =
           rentalIncome + dif * units * rentalIncomePerSecPerUnit;
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {currentRentalIncome.toString().slice(0, 7)}
           </Typography>
         );
@@ -104,7 +105,7 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { paidRentalIncome } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {paidRentalIncome}
           </Typography>
         );
@@ -132,6 +133,8 @@ const AssetManagement = () => {
             backgroundColor: colors.blueAccent[700],
             border: "none",
             color: colors.grey[100],
+            fontSize: "1rem",
+            fontWeight: 600,
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
@@ -143,14 +146,23 @@ const AssetManagement = () => {
           },
           "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
             fontSize: "1rem",
-            fontWeight: 700,
+            fontWeight: 600,
           },
+         
           "& .MuiToolbar-gutters": {
             display: "none",
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
-        <DataGrid rows={approvedProperties} columns={columns} />
+        <DataGrid
+          rows={approvedProperties}
+          columns={columns}
+          disableSelectionOnClick
+          components={{ Toolbar: CustomToolbar }}
+        />
       </Box>
     </Box>
   );

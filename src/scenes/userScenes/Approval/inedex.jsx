@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
 
@@ -45,7 +46,7 @@ const Approval = () => {
       flex: 1,
       renderCell: ({ row: { id } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {id}
           </Typography>
         );
@@ -57,7 +58,7 @@ const Approval = () => {
       flex: 1,
       renderCell: ({ row: { title } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {title}
           </Typography>
         );
@@ -73,24 +74,13 @@ const Approval = () => {
       renderCell: ({ row: { date } }) => {
         let formatedDate = date.slice(0, 10);
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {formatedDate}
           </Typography>
         );
       },
     },
-    {
-      field: "units",
-      headerName: "Units",
-      flex: 1,
-      renderCell: ({ row: { price } }) => {
-        return (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {price / 100}
-          </Typography>
-        );
-      },
-    },
+
     {
       field: "type",
       headerName: "Type",
@@ -100,7 +90,7 @@ const Approval = () => {
       align: "center",
       renderCell: ({ row: { type } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {type}
           </Typography>
         );
@@ -115,7 +105,7 @@ const Approval = () => {
       align: "center",
       renderCell: ({ row: { subtype } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {subtype}
           </Typography>
         );
@@ -130,7 +120,7 @@ const Approval = () => {
       align: "center",
       renderCell: ({ row: { country } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {country}
           </Typography>
         );
@@ -144,7 +134,7 @@ const Approval = () => {
       align: "center",
       renderCell: ({ row: { city } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {city}
           </Typography>
         );
@@ -158,7 +148,7 @@ const Approval = () => {
       align: "center",
       renderCell: ({ row: { area } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" fontSize='0.6rem'color={colors.grey[100]}>
             {area}
           </Typography>
         );
@@ -170,7 +160,7 @@ const Approval = () => {
       flex: 1,
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price}
           </Typography>
         );
@@ -178,7 +168,7 @@ const Approval = () => {
     },
 
     {
-      field: "approve",
+      field: "isApproved",
       headerName: "Status",
       flex: 1,
       align: "center",
@@ -192,7 +182,7 @@ const Approval = () => {
       },
     },
     {
-      field: "remove",
+      field: "_id",
       headerName: "Delete Property",
       headerAlign: "center",
       align: "center",
@@ -231,11 +221,12 @@ const Approval = () => {
           },
           "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
             fontSize: "1rem",
-            fontWeight: 700,
+            fontWeight: 600,
           },
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: colors.blueAccent[700],
             border: "none",
+            fontSize: "1rem",
             color: colors.grey[100],
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -249,9 +240,17 @@ const Approval = () => {
           "& .MuiToolbar-gutters": {
             display: "none",
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
-        <DataGrid rows={pendingProperties} columns={columns} />
+        <DataGrid
+          rows={pendingProperties}
+          columns={columns}
+          disableSelectionOnClick
+          components={{ Toolbar: CustomToolbar }}
+        />
       </Box>
     </Box>
   );

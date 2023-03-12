@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
+import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import InvestModal from "../../../components/InvestModal";
 import modalContext from "../../../contexts/modalContext/modalContext";
@@ -34,7 +35,7 @@ function Marketplace() {
       flex: 1,
       renderCell: ({ row: { genaratedPropertyId } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {genaratedPropertyId}
           </Typography>
         );
@@ -46,7 +47,7 @@ function Marketplace() {
       flex: 1,
       renderCell: ({ row: { name } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {name}
           </Typography>
         );
@@ -58,7 +59,7 @@ function Marketplace() {
       flex: 1,
       renderCell: ({ row: { date } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {date.slice(0, 10)}
           </Typography>
         );
@@ -70,7 +71,7 @@ function Marketplace() {
       flex: 1,
       renderCell: ({ row: { userName } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {userName}
           </Typography>
         );
@@ -84,7 +85,7 @@ function Marketplace() {
       align: "left",
       renderCell: ({ row: { units } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {units}
           </Typography>
         );
@@ -98,7 +99,7 @@ function Marketplace() {
       align: "left",
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price}
           </Typography>
         );
@@ -166,10 +167,16 @@ function Marketplace() {
             "& .name-column--cell": {
               color: colors.greenAccent[300],
             },
+            "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
+              fontSize: "1rem",
+              fontWeight: 600,
+            },
             "& .MuiDataGrid-columnHeader": {
               backgroundColor: colors.blueAccent[700],
               border: "none",
               color: colors.grey[100],
+              fontSize: "1rem",
+              fontWeight: 600,
             },
             "& .MuiDataGrid-virtualScroller": {
               backgroundColor: colors.primary[400],
@@ -182,9 +189,17 @@ function Marketplace() {
             "& .MuiToolbar-gutters": {
               display: "none",
             },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+              color: `${colors.grey[100]} !important`,
+            },
           }}
         >
-          <DataGrid rows={listedProperties} columns={columns} />
+          <DataGrid
+            rows={listedProperties}
+            columns={columns}
+            disableSelectionOnClick
+            components={{ Toolbar: CustomToolbar }}
+          />
           <InvestModal
             propertyInfo={propertyInfo}
             url="http://localhost:5000/api/invested/investinlistedproperty"

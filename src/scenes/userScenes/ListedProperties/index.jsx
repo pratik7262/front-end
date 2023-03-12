@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { colors } from "../../../theme";
 import { Header } from "../../../components/Header";
+import CustomToolbar from "../../../components/CustomToolbar";
 
 const ListedProperties = () => {
   const [listedProperty, setlistedProperty] = useState([]);
@@ -51,7 +52,7 @@ const ListedProperties = () => {
       flex: 1,
       renderCell: ({ row: { genaratedPropertyId } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {genaratedPropertyId}
           </Typography>
         );
@@ -63,7 +64,7 @@ const ListedProperties = () => {
       flex: 1,
       renderCell: ({ row: { name } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {name}
           </Typography>
         );
@@ -75,7 +76,7 @@ const ListedProperties = () => {
       flex: 1,
       renderCell: ({ row: { date } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {date.slice(0, 10)}
           </Typography>
         );
@@ -89,7 +90,7 @@ const ListedProperties = () => {
       align: "left",
       renderCell: ({ row: { units } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {units}
           </Typography>
         );
@@ -149,10 +150,16 @@ const ListedProperties = () => {
             "& .name-column--cell": {
               color: colors.greenAccent[300],
             },
+            "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
+              fontSize: "1rem",
+              fontWeight: 600,
+            },
             "& .MuiDataGrid-columnHeader": {
               backgroundColor: colors.blueAccent[700],
               border: "none",
               color: colors.grey[100],
+              fontSize: "1rem",
+              fontWeight: 600,
             },
             "& .MuiDataGrid-virtualScroller": {
               backgroundColor: colors.primary[400],
@@ -165,9 +172,17 @@ const ListedProperties = () => {
             "& .MuiToolbar-gutters": {
               display: "none",
             },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+              color: `${colors.grey[100]} !important`,
+            },
           }}
         >
-          <DataGrid rows={listedProperty} columns={columns} />
+          <DataGrid
+            rows={listedProperty}
+            columns={columns}
+            disableSelectionOnClick
+            components={{ Toolbar: CustomToolbar }}
+          />
         </Box>
       </Box>
     </>

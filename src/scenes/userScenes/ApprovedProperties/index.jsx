@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
-
+import CustomToolbar from "../../../components/CustomToolbar";
 const ApprovedProperties = () => {
   const [approvedProperties, setApprovedProperties] = useState([]);
   const fetchData = async () => {
@@ -31,7 +31,7 @@ const ApprovedProperties = () => {
       flex: 1,
       renderCell: ({ row: { id } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {id}
           </Typography>
         );
@@ -43,7 +43,7 @@ const ApprovedProperties = () => {
       flex: 1,
       renderCell: ({ row: { title } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {title}
           </Typography>
         );
@@ -55,7 +55,7 @@ const ApprovedProperties = () => {
       flex: 1,
       renderCell: ({ row: { date } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {date.slice(0, 10)}
           </Typography>
         );
@@ -67,7 +67,7 @@ const ApprovedProperties = () => {
       flex: 1,
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price / 100}
           </Typography>
         );
@@ -82,7 +82,7 @@ const ApprovedProperties = () => {
       align: "center",
       renderCell: ({ row: { type } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {type}
           </Typography>
         );
@@ -97,7 +97,7 @@ const ApprovedProperties = () => {
       align: "center",
       renderCell: ({ row: { subtype } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {subtype}
           </Typography>
         );
@@ -112,7 +112,7 @@ const ApprovedProperties = () => {
       align: "center",
       renderCell: ({ row: { country } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {country}
           </Typography>
         );
@@ -126,7 +126,7 @@ const ApprovedProperties = () => {
       align: "center",
       renderCell: ({ row: { city } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {city}
           </Typography>
         );
@@ -140,7 +140,7 @@ const ApprovedProperties = () => {
       align: "center",
       renderCell: ({ row: { area } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {area}
           </Typography>
         );
@@ -152,7 +152,7 @@ const ApprovedProperties = () => {
       flex: 1,
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price}
           </Typography>
         );
@@ -205,14 +205,23 @@ const ApprovedProperties = () => {
           },
           "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
             fontSize: "1rem",
-            fontWeight: 700,
+            fontWeight: 600,
           },
           "& .MuiToolbar-gutters": {
             display: "none",
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.grey[100]} !important`,
+          },
+       
         }}
       >
-        <DataGrid rows={approvedProperties} columns={columns} />
+        <DataGrid
+          rows={approvedProperties}
+          columns={columns}
+          disableSelectionOnClick
+          components={{ Toolbar: CustomToolbar }}
+        />
       </Box>
     </Box>
   );

@@ -1,21 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarExport,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
-
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-}
+import CustomToolbar from "../../../components/CustomToolbar";
 
 export const History = () => {
   const [history, setHistory] = useState([]);
@@ -143,6 +132,7 @@ export const History = () => {
           "& .MuiDataGrid-panelFooter": {
             color: `${colors.grey[100]} !important`,
           },
+          
         }}
       >
         <DataGrid
