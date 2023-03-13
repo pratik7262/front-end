@@ -38,6 +38,7 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
   return (
     <Box
       sx={{
+        overflow: "hidden",
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -55,7 +56,7 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar style={{overflow: "hidden",}} collapsed={isCollapsed}>
         <Menu iconShape="square">
           <MenuItem
             onClick={() => {

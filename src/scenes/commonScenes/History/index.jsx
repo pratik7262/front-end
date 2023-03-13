@@ -2,9 +2,9 @@ import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Header } from "../Header";
-import { colors } from "../../theme";
-import CustomToolbar from "../CustomToolbar";
+import CustomToolbar from "../../../components/CustomToolbar";
+import { Header } from "../../../components/Header";
+import { colors } from "../../../theme";
 
 export const History = ({ url, token }) => {
   const [history, setHistory] = useState([]);
@@ -19,7 +19,19 @@ export const History = ({ url, token }) => {
   }, [history]);
 
   const columns = [
-    // { field: "id", headerName: "ID",flex:0.5 },
+    {
+      field: "date",
+      headerName: "Date",
+      cellClassName: "name-column--cell",
+      flex: 1,
+      renderCell: ({ row: { date } }) => {
+        return (
+          <Typography variant="h6" color={colors.grey[100]}>
+            {date ? date.toString().slice(0,10):'Date Not Available'}
+          </Typography>
+        );
+      },
+    },
     {
       field: "userName",
       headerName: "User",
@@ -100,7 +112,7 @@ export const History = ({ url, token }) => {
     },
   ];
   return (
-    <Box margin="20px">
+    <Box margin={2}>
       <Header title="History" />
       <Box
         m="40px 0 0 0"
@@ -135,7 +147,7 @@ export const History = ({ url, token }) => {
           "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
             fontSize: "1rem",
             fontWeight: 600,
-            color:colors.grey[100]
+            color: colors.grey[100],
           },
         }}
       >

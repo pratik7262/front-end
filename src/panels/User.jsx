@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../scenes/userScenes/Home";
-import NewProperties from "../scenes/userScenes/NewProperties";
 import AddProperty from "../scenes/userScenes/AddProperty";
 import ApprovedProperties from "../scenes/userScenes/ApprovedProperties";
 import ListedProperties from "../scenes/userScenes/ListedProperties";
-import Marketplace from "../scenes/userScenes/Marketplace";
 import AssetManagement from "../scenes/userScenes/AssetManagement";
 import Login from "../components/Login";
 import Signup from "../components/SignUp";
@@ -13,7 +11,9 @@ import { UTopbar } from "../scenes/userScenes/Global/UTopbar";
 import USidebar from "../scenes/userScenes/Global/USidebar";
 import Approval from "../scenes/userScenes/Approval/inedex";
 import Holdings from "../scenes/userScenes/Holdings";
-import { History } from "../components/History";
+import { History } from "../scenes/commonScenes/History";
+import Marketplace from "../scenes/commonScenes/Marketplace";
+import NewProperties from "../scenes/commonScenes/NewProperties";
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);

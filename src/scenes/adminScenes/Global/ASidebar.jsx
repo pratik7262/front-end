@@ -1,4 +1,9 @@
-import { DashboardOutlined, MenuOutlined } from "@mui/icons-material";
+import {
+  DashboardOutlined,
+  LocalGroceryStoreOutlined,
+  MenuOutlined,
+  NewReleasesOutlined,
+} from "@mui/icons-material";
 import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -95,6 +100,24 @@ const ASidebar = ({ isCollapsed, setIsCollapsed }) => {
               title="Asset Management"
               to="/assetmanagement"
               icon={<MdWebAsset />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              to="/newproperties"
+              icon={
+                <NewReleasesOutlined sx={{ color: colors.grey[100] }} />
+              }
+              title="New Properties"
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              to="/marketplace"
+              icon={
+                <LocalGroceryStoreOutlined sx={{ color: colors.grey[100] }} />
+              }
+              title="Marketplace"
               selected={selected}
               setSelected={setSelected}
             />

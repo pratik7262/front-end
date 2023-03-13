@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
 
@@ -193,9 +194,17 @@ const AssetManagement = () => {
           "& .MuiToolbar-gutters": {
             display: "none",
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+            color: `${colors.grey[100]} !important`,
+          },  
         }}
       >
-        <DataGrid rows={approvedProperties} columns={columns} />
+        <DataGrid
+          rows={approvedProperties}
+          columns={columns}
+          disableSelectionOnClick
+          components={{ Toolbar: CustomToolbar }}
+        />
       </Box>
     </Box>
   );

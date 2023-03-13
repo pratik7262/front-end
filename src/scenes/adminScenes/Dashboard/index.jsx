@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
 
@@ -101,8 +102,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <Box m="10px 10px 0">
-        <Header title='Dashboard'/>
+      <Box m={2}>
+        <Header title="Dashboard" />
         <Box
           m="40px 0 0 0"
           height="80vh"
@@ -137,9 +138,17 @@ const Dashboard = () => {
               fontWeight: 600,
               color: colors.grey[100],
             },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text ": {
+              color: `${colors.grey[100]} !important`,
+            },
           }}
         >
-          <DataGrid rows={pendingProperties} columns={columns} />
+          <DataGrid
+            rows={pendingProperties}
+            columns={columns}
+            disableSelectionOnClick
+            components={{ Toolbar: CustomToolbar }}
+          />
         </Box>
       </Box>
     </>
