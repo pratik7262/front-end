@@ -10,11 +10,12 @@ import React, { useContext, useEffect, useState } from "react";
 import modalContext from "../../../contexts/modalContext/modalContext";
 import { colors } from "../../../theme";
 import InvestModal from "../../../components/InvestModal";
+import userContext from "../../../contexts/userContext/userContext";
 
 const NewProperties = () => {
   const [property, setProperty] = useState([]);
   const [propertyInfo, setPropertyInfo] = useState({});
-
+  const contextVars = useContext(userContext);
   const { handleOpen } = useContext(modalContext);
 
   const getProperties = async () => {
@@ -105,7 +106,10 @@ const NewProperties = () => {
                   </Typography>
                 </CardContent>
                 <CardActions
-                  sx={{ display: "flex", justifyContent: "space-between" }}
+                  sx={{
+                    display: !contextVars.user.isAdmin ? "flex" : "none",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <Button
                     color="blue"

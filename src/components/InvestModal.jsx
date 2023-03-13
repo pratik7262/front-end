@@ -1,8 +1,9 @@
-import { Button, Grid, Modal, Paper, TextField } from "@mui/material";
+import { Button, Grid, Modal, Paper } from "@mui/material";
 import React, { useContext, useState } from "react";
 import investContext from "../contexts/investContext/investContext";
 import modalContext from "../contexts/modalContext/modalContext";
 import { colors } from "../theme";
+import CustomTextField from "./CustomTextField";
 
 const InvestModal = ({ propertyInfo, url }) => {
   const { open, handleClose } = useContext(modalContext);
@@ -43,9 +44,9 @@ const InvestModal = ({ propertyInfo, url }) => {
         aria-describedby="modal-modal-description"
       >
         <Grid mt={4}>
-          <Paper elevation={10} style={paperStyle}>
+          <Paper elevation={10} sx={paperStyle}>
             <form onSubmit={onSubmit}>
-              <TextField
+              {/* <TextField
                 label="Units"
                 placeholder="Enter No Of Units"
                 fullWidth
@@ -53,6 +54,14 @@ const InvestModal = ({ propertyInfo, url }) => {
                 sx={{ my: 1 }}
                 name="units"
                 onChange={onChange}
+              /> */}
+              <CustomTextField
+                value={units}
+                onChange={onChange}
+                fullWidth={true}
+                maxWidth="340px"
+                label="Units"
+                name="units"
               />
               <Button
                 disabled={disabled}

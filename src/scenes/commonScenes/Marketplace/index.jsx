@@ -5,10 +5,12 @@ import CustomToolbar from "../../../components/CustomToolbar";
 import { Header } from "../../../components/Header";
 import InvestModal from "../../../components/InvestModal";
 import modalContext from "../../../contexts/modalContext/modalContext";
+import userContext from "../../../contexts/userContext/userContext";
 import { colors } from "../../../theme";
 
 function Marketplace() {
   const { handleOpen } = useContext(modalContext);
+  const contextVars = useContext(userContext);
   const [propertyInfo, setPropertyInfo] = useState({});
   const [listedProperties, setListedProperties] = useState([]);
   const getProperties = async () => {
@@ -143,6 +145,7 @@ function Marketplace() {
             }}
             color="blue"
             variant="contained"
+            disabled={contextVars.user.isAdmin }
           >
             Invest
           </Button>

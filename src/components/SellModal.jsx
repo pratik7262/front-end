@@ -1,13 +1,14 @@
-import { Button, Grid, Modal, Paper, TextField } from "@mui/material";
+import { Button, Grid, Modal, Paper, } from "@mui/material";
 import React, { useContext, useState } from "react";
 import investContext from "../contexts/investContext/investContext";
 import modalContext from "../contexts/modalContext/modalContext";
 import { colors } from "../theme";
+import CustomTextField from "./CustomTextField";
 
 const SellModal = ({ propertyInfo }) => {
   const paperStyle = {
     padding: 20,
-    height: "30vh",
+    height: "35vh",
     margin: "20px auto",
     position: "absolute",
     top: "50%",
@@ -19,10 +20,10 @@ const SellModal = ({ propertyInfo }) => {
     p: 4,
   };
 
-  const [details, setDetails] = useState({ units: 0, price: 0 });
+  const [details, setDetails] = useState({ units: '', price: '' });
   const { disabled, setDisabled } = useContext(investContext);
   const { handleClose, sOpen } = useContext(modalContext);
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setDisabled(true);
@@ -37,8 +38,8 @@ const SellModal = ({ propertyInfo }) => {
         body: JSON.stringify({
           propertyId: propertyInfo.propertyId,
           name: propertyInfo.name,
-          units: details.units,
-          price: details.price,
+          units: parseInt(details.units),
+          price: parseInt(details.price),
           id: propertyInfo.id,
         }),
       }
@@ -68,10 +69,31 @@ const SellModal = ({ propertyInfo }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Grid mt={4}>
-          <Paper elevation={10} style={paperStyle}>
+        <Grid
+          sx={{
+            bgcolor: colors.primary[400],
+          }}
+          mt={4}
+        >
+          <Paper elevation={10} sx={paperStyle}>
             <form onSubmit={onSubmit}>
-              <TextField
+              <CustomTextField
+                value={details.units}
+                onChange={onChange}
+                fullWidth={true}
+                maxWidth='340px'
+                label="Units"
+                name="units"
+              />
+               <CustomTextField
+                value={details.price}
+                onChange={onChange}
+                fullWidth={true}
+                maxWidth='340px'
+                label="Price"
+                name="price"
+              />
+              {/* <TextField
                 label="Units"
                 placeholder="Enter No Of Units"
                 fullWidth
@@ -88,7 +110,7 @@ const SellModal = ({ propertyInfo }) => {
                 sx={{ my: 1 }}
                 name="price"
                 onChange={onChange}
-              />
+              /> */}
               <Button
                 disabled={disabled}
                 type="submit"

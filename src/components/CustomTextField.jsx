@@ -7,10 +7,12 @@ const CustomTextField = ({
   fullWidth,
   onChange,
   value,
+  maxWidth,
   select,
 }) => {
   return (
     <TextField
+      required
       select={select}
       label={label}
       fullWidth={fullWidth}
@@ -18,7 +20,7 @@ const CustomTextField = ({
       color="neutral"
       variant="filled"
       sx={{
-        maxWidth: "180px",
+        maxWidth: maxWidth ? maxWidth : "180px",
         fontSize: "3rem",
         my: 1,
         "& .css-1iur4r6-MuiFormLabel-root-MuiInputLabel-root ": {
