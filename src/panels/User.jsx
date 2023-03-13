@@ -13,6 +13,7 @@ import { UTopbar } from "../scenes/userScenes/Global/UTopbar";
 import USidebar from "../scenes/userScenes/Global/USidebar";
 import Approval from "../scenes/userScenes/Approval/inedex";
 import Holdings from "../scenes/userScenes/Holdings";
+import { History } from "../components/History";
 
 const User = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -52,6 +53,15 @@ const User = () => {
           <Route
             path="/assetmanagement/marketplace"
             element={<Marketplace />}
+          />
+          <Route
+            path="/history"
+            element={
+              <History
+                url="http://localhost:5000/api/history/getspecifichistory"
+                token={localStorage.getItem("token")}
+              />
+            }
           />
         </Routes>
       </main>

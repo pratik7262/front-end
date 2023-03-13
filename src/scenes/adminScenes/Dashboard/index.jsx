@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+import { Header } from "../../../components/Header";
 import { colors } from "../../../theme";
 
 const Dashboard = () => {
@@ -20,7 +21,7 @@ const Dashboard = () => {
       flex: 1,
       renderCell: ({ row: { title } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {title}
           </Typography>
         );
@@ -34,7 +35,7 @@ const Dashboard = () => {
       align: "left",
       renderCell: ({ row: { date } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {date}
           </Typography>
         );
@@ -46,7 +47,7 @@ const Dashboard = () => {
       flex: 1,
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price}
           </Typography>
         );
@@ -58,7 +59,7 @@ const Dashboard = () => {
       flex: 1,
       renderCell: ({ row: { address } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {address}
           </Typography>
         );
@@ -101,6 +102,7 @@ const Dashboard = () => {
   return (
     <>
       <Box m="10px 10px 0">
+        <Header title='Dashboard'/>
         <Box
           m="40px 0 0 0"
           height="80vh"
@@ -129,6 +131,11 @@ const Dashboard = () => {
             },
             "& .MuiToolbar-gutters": {
               display: "none",
+            },
+            "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
+              fontSize: "1rem",
+              fontWeight: 600,
+              color: colors.grey[100],
             },
           }}
         >

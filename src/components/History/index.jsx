@@ -2,15 +2,15 @@ import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Header } from "../../../components/Header";
-import { colors } from "../../../theme";
-import CustomToolbar from "../../../components/CustomToolbar";
+import { Header } from "../Header";
+import { colors } from "../../theme";
+import CustomToolbar from "../CustomToolbar";
 
-export const History = () => {
+export const History = ({ url, token }) => {
   const [history, setHistory] = useState([]);
 
   const getHistory = async () => {
-    let res = await axios.get("http://localhost:5000/api/history/gethistory");
+    let res = await axios.get(url, { headers: { "auth-token": token } });
     setHistory(res.data.history);
   };
 
@@ -27,7 +27,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { userName } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {userName}
           </Typography>
         );
@@ -40,7 +40,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { added } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {added}
           </Typography>
         );
@@ -53,7 +53,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { invested } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {invested}
           </Typography>
         );
@@ -66,7 +66,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { listed } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {listed}
           </Typography>
         );
@@ -79,7 +79,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { units } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {units}
           </Typography>
         );
@@ -92,7 +92,7 @@ export const History = () => {
       flex: 1,
       renderCell: ({ row: { price } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {price}
           </Typography>
         );
@@ -132,7 +132,11 @@ export const History = () => {
           "& .MuiDataGrid-panelFooter": {
             color: `${colors.grey[100]} !important`,
           },
-          
+          "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
+            fontSize: "1rem",
+            fontWeight: 600,
+            color:colors.grey[100]
+          },
         }}
       >
         <DataGrid

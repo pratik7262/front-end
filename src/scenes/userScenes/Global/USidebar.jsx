@@ -11,6 +11,7 @@ import {
 import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { AiOutlineHistory } from "react-icons/ai";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Link } from "react-router-dom";
@@ -170,6 +171,13 @@ const USidebar = ({ isCollapsed, setIsCollapsed }) => {
                 <LocalGroceryStoreOutlined sx={{ color: colors.grey[100] }} />
               }
               title="Marketplace"
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="History"
+              to="/history"
+              icon={<AiOutlineHistory />}
               selected={selected}
               setSelected={setSelected}
             />

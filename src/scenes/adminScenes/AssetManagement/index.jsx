@@ -25,12 +25,28 @@ const AssetManagement = () => {
 
   const columns = [
     {
+      field: "InvestedDate",
+      headerName: "Date",
+      flex: 1,
+      renderCell: ({ row: { investedDate } }) => {
+        return investedDate ? (
+          <Typography variant="h6" color={colors.grey[100]}>
+            {investedDate.slice(0, 10)}
+          </Typography>
+        ) : (
+          <Typography variant="h6" color={colors.grey[100]}>
+            Not Sold
+          </Typography>
+        );
+      },
+    },
+    {
       field: "id",
       headerName: "id",
       flex: 1,
       renderCell: ({ row: { genaratedId } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {genaratedId}
           </Typography>
         );
@@ -42,24 +58,8 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { userName } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {userName}
-          </Typography>
-        );
-      },
-    },
-    {
-      field: "InvestedDate",
-      headerName: "Date",
-      flex: 1,
-      renderCell: ({ row: { investedDate } }) => {
-        return investedDate ? (
-          <Typography variant="h5" color={colors.grey[100]}>
-            {investedDate.slice(0, 10)}
-          </Typography>
-        ) : (
-          <Typography variant="h5" color={colors.grey[100]}>
-            Not Sold
           </Typography>
         );
       },
@@ -70,7 +70,7 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { units } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {units}
           </Typography>
         );
@@ -90,7 +90,7 @@ const AssetManagement = () => {
         let currentRentalIncome =
           rentalIncome + dif * units * rentalIncomePerSecPerUnit;
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {currentRentalIncome.toString().slice(0, 7)}
           </Typography>
         );
@@ -102,7 +102,7 @@ const AssetManagement = () => {
       flex: 1,
       renderCell: ({ row: { paidRentalIncome } }) => {
         return (
-          <Typography variant="h5" color={colors.grey[100]}>
+          <Typography variant="h6" color={colors.grey[100]}>
             {paidRentalIncome}
           </Typography>
         );
@@ -131,12 +131,12 @@ const AssetManagement = () => {
           let currentRentalIncome =
             rentalIncome + dif * units * rentalIncomePerSecPerUnit;
           console.log(currentRentalIncome);
-        
+
           const res = await axios.post("http://localhost:5000/api/rental/pay", {
-              id: _id,
-              currentRentalIncome: currentRentalIncome,
+            id: _id,
+            currentRentalIncome: currentRentalIncome,
           });
-          
+
           if (res.data.resMsg) {
             alert(res.data.resMsg);
           }
@@ -188,7 +188,7 @@ const AssetManagement = () => {
           },
           "& .css-1jbbcbn-MuiDataGrid-columnHeaderTitle": {
             fontSize: "1rem",
-            fontWeight: 700,
+            fontWeight: 600,
           },
           "& .MuiToolbar-gutters": {
             display: "none",
