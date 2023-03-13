@@ -24,10 +24,12 @@ import { Header } from "../../../components/Header";
 const Row = (props) => {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-
+  const tableCellSX = { color: "black", fontSize: "0.8rem", fontWeight: 600 };
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow
+        sx={{ "& > *": { borderBottom: "unset", bgcolor: "green.main" } }}
+      >
         <TableCell sx={{ color: "white" }}>
           <IconButton
             aria-label="expand row"
@@ -35,51 +37,66 @@ const Row = (props) => {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <KeyboardArrowUpIcon sx={{ color: "white" }} />
+              <KeyboardArrowUpIcon sx={tableCellSX} />
             ) : (
-              <KeyboardArrowDownIcon sx={{ color: "white" }} />
+              <KeyboardArrowDownIcon sx={tableCellSX} />
             )}
           </IconButton>
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.genaratedPropertyId}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.name}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.type}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.subtype}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.area}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.city}
         </TableCell>
-        <TableCell sx={{ color: "white" }} align="center">
+        <TableCell sx={tableCellSX} align="center">
           {row.country}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow
+        sx={{
+          "& .css-1dbhpuz-MuiTableCell-root": {
+            border: "none",
+          },
+        }}
+      >
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Table size="small" aria-label="purchases">
-                <TableHead sx={{ bgcolor: "green.main" }}>
+              <Table sx={{ ml: "9vw" }} size="small" aria-label="purchases">
+                <TableHead sx={{ bgcolor: "#3e4396" }}>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Units</TableCell>
-                    <TableCell align="center">Price Per Unit</TableCell>
-                    <TableCell align="center">Sell</TableCell>
+                    <TableCell sx={{ color: "white" }}>Date</TableCell>
+                    <TableCell sx={{ color: "white" }}>Units</TableCell>
+                    <TableCell sx={{ color: "white" }} align="center">
+                      Price Per Unit
+                    </TableCell>
+                    <TableCell sx={{ color: "white" }} align="center">
+                      Sell
+                    </TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody sx={{ border: "none" }}>
                   {row.investments.map((investment) => {
                     return (
-                      <TableRow key={investment._id}>
+                      <TableRow
+                        sx={{
+                          border:'none'
+                        }}
+                        key={investment._id}
+                      >
                         <TableCell
                           sx={{ color: "white" }}
                           component="th"
