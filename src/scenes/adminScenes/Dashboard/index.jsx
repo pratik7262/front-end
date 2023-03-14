@@ -78,8 +78,8 @@ const Dashboard = () => {
             `http://localhost:5000/api/property/approveproperty/${_id}`
           );
           const json = await res.json();
-          if (json.msg) {
-            alert(json.msg);
+          if (json.resMSG) {
+            alert(json.resMSG);
             color = "green";
             text = "Approved";
           }
